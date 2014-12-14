@@ -6,132 +6,61 @@
 	// Web version
 -->
 <style type="text/css"> 
-body { 
-	margin: 0;
-} 
-
 #front {
+	margin: 0px;
 	height: 200px;
-	background: url(Default.png) no-repeat;
+	background: url(Bg.png) no-repeat;
 	display: block;
 	position: relative;
-}
-
-#canvas {
-	z-index: 1;
 }
 
 #trigger_btn {
 	width: 60px;
 	position: absolute;
-	bottom: 15px;
+	top: 160px;
 	left: 70px;
-
 	color: black;
-}
-
-#bpc_select {
-	position: absolute;
-	bottom: 56px;
-	left: 55px;
-	
-	opacity: 0.0;
-	z-index: 3;
-}
-
-#bpc_select_textbox {
-	position: absolute;
-	bottom: 60px;
-	left: 65px;
-	
-	text-align: center;
-	color: #343434;
-	text-shadow: 1px 1px 0 white;
-	font: 12px "Helvetica";
-	font-weight: bold;
-	
-	z-index: 2;
-}
-
-#bpc_select_bg {
-	position: absolute;
-	bottom: 58px;
-	left: 53px;
-	
-	z-index: 1;
-}
-
-#bpc_label {
-	position: absolute;
-	bottom: 59px;
-	left: 115px;
-	
-	color: #343434;
-	text-shadow: 1px 1px 0 white;
-	font: 12px "Helvetica";
-	font-weight: bold;
 }
 
 #bpm_select {
 	position: absolute;
-	bottom: 46px;
+	top: 131px;
 	left: 55px;
-	
 	opacity: 0.0;
 	z-index: 3;
 }
 
 #bpm_select_textbox {
 	position: absolute;
-	bottom: 50px;
+	top: 136px;
 	left: 65px;
-	
 	text-align: center;
 	color: #343434;
 	text-shadow: 1px 1px 0 white;
 	font: 12px "Helvetica";
 	font-weight: bold;
-	
 	z-index: 2;
 }
 
 #bpm_select_bg {
 	position: absolute;
-	bottom: 48px;
+	top: 134px;
 	left: 53px;
-	
 	z-index: 1;
 }
 
 #bpm_label {
 	position: absolute;
-	bottom: 49px;
+	top: 136px;
 	left: 115px;
-	
 	color: #343434;
 	text-shadow: 1px 1px 0 white;
 	font: 12px "Helvetica";
 	font-weight: bold;
 }
-
-
-#count {
-	position: absolute;
-	top: 10px;
-	left: 85px;
-
-	text-align: center;
-	color: #06C;
-	font: 40px "Helvetica";
-	font-weight: bold;
-	text-shadow: #AAA 1px 1px 1px;
-}
 </style>
 
 <script type="text/javascript">
-	var bpmArray = new Array();
-	// metronome vars:
-	var c=0;
 	var t; // metronome beat interval
 	var animation_interval; // metronome animation interval
 	var lock = 0; // if set to 1, it means that nothing has changed, 0 means the interval needs to be refreshed to the new bpm
@@ -139,9 +68,7 @@ body {
 	// Visualization constants:
 	var VIS_SQUARE = 0;
 	var VIS_COUNT = 1;
-	var VIS_ANALOG = 2;
-	var VIS_NUM_VISUALIZATIONS = 3;
-	
+	var VIS_ANALOG = 2;	
 	var VIS_ANALOG_MAX_ANGLE = 50;
 	var VIS_ANALOG_FPS = 60;
 	
@@ -156,9 +83,8 @@ body {
 	// beats per cycle
 	var vis_count_bpc = 4;
 	
-	// analog visualization -->
 	// vertical offset:
-	var vis_analog_metroYoffset = 105;
+	var vis_analog_metroYoffset = 108;
 	// current angle:
 	var vis_analog_curAngle = 0;
 	// current rotation direction:
@@ -173,43 +99,6 @@ body {
 		return degree / 180 * Math.PI;
 	}
 	
-	// create the BPM array options
-	function generateBPMArray() {
-		// Range of values: 40-208
-		var granularity = 4;
-		var range_min = 40;
-		var range_max = 208;
-		
-		var i;	
-		for (i = range_min; i <= range_max; i+=granularity) {
-			bpmArray[i] = i;
-		}
-	}
-	
-	// write the BPM array options
-	function writeBPMArray() {		
-		for (var x in bpmArray)
-		{
-			document.write('<option value="' + bpmArray[x] + '"');
-			if (bpmArray[x] == currentBPM) {
-				document.write(' selected');
-			}
-			document.writeln('>' + bpmArray[x] + "</option>");
-		}	
-	}
-	
-	// write the BPC array options
-	function writeBPCArray() {
-		for (var i=1; i<=32; i++)
-		{
-			document.write('<option value="' + i + '"');
-			if (i == vis_count_bpc) {
-				document.write(' selected');
-			}
-			document.writeln('>' + i + "</option>");
-		}	
-	}
-	
 	// refresh the current BPM values
 	function refreshBPM() {
 		// bpm dropdown has just been altered, so access that form element and set current BPM
@@ -219,121 +108,16 @@ body {
 		lock = 0;
 	}
 	
-	// refresh the current BPC values
-	function refreshBPC() {
-		// bpc dropdown has just been altered, so access that form element and set current BPC
-		vis_count_bpc = document.metronomeForm.bpc_select.value;
-		document.getElementById("bpc_select_textbox").innerHTML = vis_count_bpc;
-	}
-	
-	// create and write out the visualization array options
-	function writeVisualizationArray() {
-		var write_vis = 0;
-		
-		// load preferences
-		if(window.widget) {
-			var temp_vis = widget.preferenceForKey("cur_vis");
-			
-			// VALID preference
-			if (temp_vis >= 0 && temp_vis < VIS_NUM_VISUALIZATIONS) {
-				write_vis = temp_vis;
-			}
-		}
-		
-		//SQUARE
-		document.write('<option value="' + VIS_SQUARE + '"');
-		if (write_vis == VIS_SQUARE) {
-			document.write(' selected');
-		}
-		document.writeln('>' + "Square" + "</option>");
-		
-		//COUNT
-		document.write('<option value="' + VIS_COUNT + '"');
-		if (write_vis == VIS_COUNT) {
-			document.write(' selected');
-		}
-		document.writeln('>' + "Count" + "</option>");
-		
-		// ANALOG
-		
-		document.write('<option value="' + VIS_ANALOG + '"');
-		if (write_vis == VIS_ANALOG) {
-			document.write(' selected');
-		}
-		document.writeln('>' + "Analog" + "</option>");
-		
-	}
-	
-	
-	// show beats per cycle controls
-	function showBPCcontrols() {
-		// Move BPM down
-		var bpmtext = document.getElementById("bpm_select_textbox");
-		var bpmselect = document.getElementById("bpm_select");
-		var bpmselectbg = document.getElementById("bpm_select_bg");
-		var bpmlabel = document.getElementById("bpm_label");
-		
-		bpmtext.style.bottom = 40 + "px";
-		bpmselect.style.bottom = 36 + "px";
-		bpmselectbg.style.bottom = 38 + "px";
-		bpmlabel.style.bottom = 39 + "px";
-		
-		// show BPC
-		var bpctext = document.getElementById("bpc_select_textbox");
-		var bpcselect = document.getElementById("bpc_select");
-		var bpcselectbg = document.getElementById("bpc_select_bg");
-		var bpclabel = document.getElementById("bpc_label");
-
-		bpctext.style.display = "block";
-		bpcselect.style.display = "block";
-		bpcselectbg.style.display = "block";
-		bpclabel.style.display = "block";
-	}
-	
-	// hide beats per cycle controls
-	function hideBPCcontrols() {
-		// Move BPM to default
-		var bpmtext = document.getElementById("bpm_select_textbox");
-		var bpmselect = document.getElementById("bpm_select");
-		var bpmselectbg = document.getElementById("bpm_select_bg");
-		var bpmlabel = document.getElementById("bpm_label");
-		
-		bpmtext.style.bottom = 50 + "px";
-		bpmselect.style.bottom = 46 + "px";
-		bpmselectbg.style.bottom = 48 + "px";
-		bpmlabel.style.bottom = 49 + "px";
-		
-		// hide BPC
-		var bpctext = document.getElementById("bpc_select_textbox");
-		var bpcselect = document.getElementById("bpc_select");
-		var bpcselectbg = document.getElementById("bpc_select_bg");
-		var bpclabel = document.getElementById("bpc_label");
-		
-		bpctext.style.display = "none";
-		bpcselect.style.display = "none";
-		bpcselectbg.style.display = "none";
-		bpclabel.style.display = "none";
-	}
-	
 	// Setup initial load
 	function setup() 
 	{
 		// Clear the screen
 		clear();
-		
-		// Set preferences:
 		// set bpm at 60 (default) when widget has just been opened
 		currentBPM = 60;
-		// make sure the textbox is showing:
 		refreshBPM();
-		
 		// set bpc at 4 (default) when widget has just been opened
 		vis_count_bpc = 4;
-		// make sure the textbox is showing:
-		refreshBPC();
-		
-		// refresh controls
-		showBPCcontrols();
 	}
 	
 	// canvas:
@@ -346,65 +130,12 @@ body {
 		// clear canvas
 		ctx.clearRect(0, 0, 200, 200);
 		ctx.save();
-		
-		// clear count
-		var counter = document.getElementById("count_text");
-		counter.innerHTML = "";
-	}
-	
-	// draw the metronome with square visualization
-	function drawMetronome () {
-
-		var canvas = document.getElementById("canvas"); 
-		var ctx = canvas.getContext("2d"); 
-		
-		ctx.clearRect(0, 0, 200, 200);
-		ctx.save();
-		
-		// Start Translation
-		if (vis_square_curPos) {
-			vis_square_metroX = vis_square_metroXdefault - vis_square_metroXoffset;
-		}
-		else {
-			vis_square_metroX = vis_square_metroXdefault + vis_square_metroXoffset;
-		}
-		vis_square_curPos = !vis_square_curPos;
-		
-		ctx.translate(vis_square_metroX, vis_square_metroY);
-		ctx.save();
-		// End Translation
-
-		ctx.fillStyle = "rgb(0,102,204)";
-		ctx.fillRect(0, 0, 10, 10);
-		
-		ctx.restore();
-		ctx.restore();
-	}
-	
-	// draw the metronome with count visualization
-	function countMetronome() {
-
-		// initiate count
-		var counter = document.getElementById("count_text");
-		
-
-		//vis_count_count = ( vis_count_count + vis_count_bpc + 1) % vis_count_bpc;
-		counter.innerHTML = vis_count_count;
-		
-		if (vis_count_count > 9) {
-			document.getElementById("count").style.left = 76 + "px";
-		}
-		else {
-			document.getElementById("count").style.left = 86 + "px";
-		}
 	}
 	
 	// draw the metronome with the analog visualization
 	function analogMetronome() 
 	{
-		// Boundary switch:
 		// Play sound and switch direction
-		
 		var canvas = document.getElementById("canvas"); 
 		var ctx = canvas.getContext("2d"); 
 	
@@ -426,7 +157,6 @@ body {
 			vis_analog_curAngle = VIS_ANALOG_MAX_ANGLE;
 			ctx.rotate(degree2rad(VIS_ANALOG_MAX_ANGLE)); 
 		}
-		
 		
 		// Draw Needle -->
 		ctx.fillStyle = "rgb(0,102,204)";
@@ -543,22 +273,14 @@ body {
 		// clear sound
 		// clear_sound();
 
-
-		
-		if (vis_count_count==1) {
+		if (vis_count_count%2==0) {
 			document.getElementById('tick2Sound').play();
 		}
 		else {
 			document.getElementById('tickSound').play();
 		}
 			
-		if (cur_vis == VIS_SQUARE) {
-			drawMetronome();
-		}
-		else if (cur_vis == VIS_COUNT) {
-			countMetronome();
-		}
-		else if (cur_vis == VIS_ANALOG) {
+		if (cur_vis == VIS_ANALOG) {
 			animation_interval = setInterval("analogAnimate()", 1000/VIS_ANALOG_FPS);
 			analogMetronome();
 		}
@@ -571,27 +293,12 @@ body {
 		}
 	}
 	
-	// Event keys:
-	function checkKey(e) {
-		if (e.keyCode == 13) {
-			refreshBPM();
-		}
-		else if (e.keyCode == 32) {
-			buttonTrigger();
-		}
-	}
-	
-	// String trim function
-	String.prototype.trim = function() {
-		return this.replace(/^\s*|\s*$/g, "")
-	}
-	
 	// End update script
 </script>
 
 </head> 
   
-<body onload="setup()" onkeydown="checkKey(event)"> 
+<body onload="setup()"> 
 	<div id="front">
 	<div id="infoButton"></div>
 		<audio id="tickSound">
@@ -602,25 +309,51 @@ body {
 		</audio>
 
    	<!-- Your widget’s front side here -->
-		<canvas id="canvas" width="200" height="200"></canvas>
-		<div id="count"><p id="count_text"></p></div>
+		<canvas id="canvas" width="200" height="200" style="z-index: 1"></canvas>
 		<form name="metronomeForm">
-			<span id="bpc_select_textbox"></span>
-			<img id="bpc_select_bg" alt="select_bg" src="Select.png" />
-			<select id="bpc_select" name="bpc_select" size="1" onchange="refreshBPC()">
-				<script type="text/javascript">
-					writeBPCArray();
-				</script>
-			</select>
-			<span id="bpc_label">BPM</span>
 			
 			<span id="bpm_select_textbox"></span>
 			<img id="bpm_select_bg" alt="select_bg" src="Select.png" />
 			<select id="bpm_select" name="bpm_select" size="1" onchange="refreshBPM()">
-				<script type="text/javascript">
-					generateBPMArray();
-					writeBPMArray();
-				</script>
+				<option value="40">40</option>
+				<option value="42">42</option>
+				<option value="44">44</option>
+				<option value="46">46</option>
+				<option value="48">48</option>
+				<option value="50">50</option>
+				<option value="52">52</option>
+				<option value="54">54</option>
+				<option value="56">56</option>
+				<option value="58">58</option>
+				<option value="60">60</option>
+				<option value="63">63</option>
+				<option value="66">66</option>
+				<option value="69">69</option>
+				<option value="72" selected>72</option>
+				<option value="76">76</option>
+				<option value="80">80</option>
+				<option value="84">84</option>
+				<option value="88">88</option>
+				<option value="92">92</option>
+				<option value="96">96</option>
+				<option value="100">100</option>
+				<option value="104">104</option>
+				<option value="108">108</option>
+				<option value="112">112</option>
+				<option value="116">116</option>
+				<option value="120">120</option>
+				<option value="126">126</option>
+				<option value="132">132</option>
+				<option value="138">138</option>
+				<option value="144">144</option>
+				<option value="152">152</option>
+				<option value="160">160</option>
+				<option value="168">168</option>
+				<option value="176">176</option>
+				<option value="184">184</option>
+				<option value="192">192</option>
+				<option value="200">200</option>
+				<option value="208">208</option>
 			</select>
 			<input type="button" id="trigger_btn" value="Start" name="trigger_btn" onclick="buttonTrigger()" />
 		</form>
