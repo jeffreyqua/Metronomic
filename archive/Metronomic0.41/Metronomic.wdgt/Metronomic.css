@@ -1,0 +1,251 @@
+	body { 
+		margin: 0;
+	} 
+	
+	.sound {
+		height: 0;
+		visibility: none;
+	}
+
+	#front {
+		height: 200px;
+		background: url(Default.png) no-repeat;
+	}
+	
+	#back {
+		height: 200px;
+		background: url(Back.png) no-repeat;
+	}
+	
+	#canvas {
+		z-index: 1;
+	}
+	
+	#infoButton { 
+		position:absolute; 
+		bottom:30px; 
+		right:30px; 
+	} 
+	  
+	#front { 
+		display:block; 
+	}  
+	
+	#back { 
+		display:none;
+	}  
+	  
+	#doneButton { 
+		position:absolute; 
+		bottom:20px; 
+		left:80px;
+	} 
+	
+	#trigger_btn {
+		width: 60px;
+		position: absolute;
+		bottom: 15px;
+		left: 70px;
+
+		color: black;
+	}
+	
+	#bpc_select {
+		position: absolute;
+		bottom: 56px;
+		left: 55px;
+		
+		opacity: 0.0;
+		z-index: 3;
+	}
+	
+	#bpc_select_textbox {
+		position: absolute;
+		bottom: 60px;
+		left: 65px;
+		
+		text-align: center;
+		color: black;
+		font: 12px "Helvetica";
+		font-weight: bold;
+		
+		z-index: 2;
+	}
+	
+	#bpc_select_bg {
+		position: absolute;
+		bottom: 58px;
+		left: 53px;
+		
+		z-index: 1;
+	}
+	
+	#bpc_label {
+		position: absolute;
+		bottom: 59px;
+		left: 115px;
+		
+		color: black;
+		font: 12px "Helvetica";
+		font-weight: bold;
+		text-shadow: #777 3px 3px 1px;
+	}
+	
+	#bpm_select {
+		position: absolute;
+		bottom: 46px;
+		left: 55px;
+		
+		opacity: 0.0;
+		z-index: 3;
+	}
+	
+	#bpm_select_textbox {
+		position: absolute;
+		bottom: 50px;
+		left: 65px;
+		
+		text-align: center;
+		color: black;
+		font: 12px "Helvetica";
+		font-weight: bold;
+		
+		z-index: 2;
+	}
+	
+	#bpm_select_bg {
+		position: absolute;
+		bottom: 48px;
+		left: 53px;
+		
+		z-index: 1;
+	}
+	
+	#bpm_label {
+		position: absolute;
+		bottom: 49px;
+		left: 115px;
+		
+		color: black;
+		font: 12px "Helvetica";
+		font-weight: bold;
+		text-shadow: #777 3px 3px 1px;
+	}
+	
+	
+	#widgetName {
+		position: absolute; 
+		top: 6px; 
+		left: 42px; 
+		color: #363; 
+		
+		font: 14px "Helvetica";
+		font-weight: bold; 
+		text-shadow: #888 3px 3px 1px;
+		z-index: 2;
+	}
+	
+	#widgetVersion {
+		color: #000;
+	}
+	
+	#divider {
+		width: 70%;
+		position: absolute; 
+		top: 17px; 
+		left: 28px;
+		color: blue;
+	}
+	
+	#vis_select {
+		position: absolute;
+		top: 35px;
+		left: 105px;
+		
+		opacity: 0.0;
+		z-index: 3;
+	}
+	
+	#vis_select_textbox {
+		position: absolute;
+		top: 40px;
+		left: 115px;
+		
+		text-align: center;
+		color: black;
+		font: 11px "Helvetica";
+		font-weight: bold;
+		
+		z-index: 2;
+	}
+	
+	#vis_select_bg {
+		position: absolute;
+		top: 37px;
+		left: 105px;
+		
+		z-index: 1;
+	}
+	
+	#vis_label {
+		position: absolute;
+		top: 40px;
+		left: 25px;
+		
+		color: black;
+		font: 12px "Helvetica";
+		font-weight: bold;
+	}
+	
+	#count {
+		position: absolute;
+		top: 10px;
+		left: 85px;
+		
+		text-align: center;
+		color: #06C;
+		font: 40px "Verdana, Arial, Helvetica, sans-serif";
+		font-weight: bold;
+		text-shadow: #AAA 3px 3px 3px;
+	}
+
+	#updateMessage {
+		display: none;
+		width: 160px;
+		position: absolute;
+		top: 62px;
+		left: 20px;
+		
+		text-align: center;
+		color: #600;
+		font: 11px "Verdana, Arial, Helvetica, sans-serif";
+		
+		z-index: 4;
+	}
+	
+	#updateLink {
+		display: none;
+		width: 160px;
+		position: absolute;
+		top: 78px;
+		left: 20px;
+		
+		text-align: center;
+		color: black;
+		font: 11px "Verdana, Arial, Helvetica, sans-serif";
+		font-weight: bold;
+		text-shadow: #AAA 3px 3px 3px;
+		
+		z-index: 4;
+	}
+	
+	#updateLink_bg {
+		position: absolute;
+		/* Outside
+		top: 74px;
+		left: 48px;
+		*/
+		top: -4px;
+		left: 29px;
+	}
+	
