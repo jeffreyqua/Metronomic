@@ -1,7 +1,7 @@
 ﻿<html> 
 <head>
 <!--
-	// Metronomic v1.1 Web Version - 13 Dec 2014
+	// Metronomic v1.2 Web Version - 17 Dec 2014
 	// Programmed by: Jeffrey Qua <jeffrey.qua@gmail.com>
 	// Web version
 -->
@@ -12,6 +12,7 @@
 <div id="Metronomic" style="margin: 20px auto; height: 200px; width: 200px; background: url('images/bg.png') no-repeat; position: relative;">
 	<audio id="tickSound">
   		<source src="sounds/tick.wav" type="audio/wav">
+  		<source src="sounds/tick.mp3" type="audio/mpeg">
 	</audio>
 
 	<canvas id="canvas" width="200" height="200" style="z-index: 1"></canvas>
@@ -82,6 +83,13 @@ var vis_analog_dir = true;
 // default BPM value
 var currentBPM = 60; 
 var animateTempo = currentBPM; // this is to prevent our animation timer from being affected
+
+// audio
+var context = new (window.AudioContext || window.webkitAudioContext)();
+
+var analyser = context.createAnalyser();
+var source; 
+var audio0 = document.getElementById('tickSound');
 
 // convert degree value into radian units
 function degree2rad(degree) {
@@ -209,7 +217,8 @@ function analogAnimate() {
 
 // clear the sound to play the next tick
 function clear_sound() {
-	document.tickSound.stop();
+	audio0.pause();
+    audio0.currentTime = 0;
 }
 
 // convert the bpm value to a millisecond delay time
@@ -245,9 +254,10 @@ function metronomeTimer() {
 	animateTempo = currentBPM;
 	
 	// clear sound
-	// clear_sound();
+	clear_sound();
 
-	document.getElementById('tickSound').play();
+	// document.getElementById('tickSound').play();
+	audio0.play();
 		
 	animation_interval = setInterval("analogAnimate()", 1000/VIS_ANALOG_FPS);
 	analogMetronome();
