@@ -37,3 +37,6 @@ v1.1 - 06 Feb 2016
 - code cleanup
 - update to Retina images
 - clipped to shorter wav files
+
+v1.1b - 07 Feb 2016
+- Downbeat on beat 12 when at 12BPM - Flamenco request

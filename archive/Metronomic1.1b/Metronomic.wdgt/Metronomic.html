@@ -1,0 +1,67 @@
+﻿<html> 
+<head>
+<!--
+  // Programmed by: Jeffrey Qua <jeffrey.qua@gmail.com>
+  // 04 Feb 2016 - v1.2 Fix for Yosemite
+-->
+<style type="text/css"> 
+  @import "Metronomic.css";
+</style>
+
+<script type="text/javascript" src="/System/Library/WidgetResources/AppleClasses/AppleInfoButton.js"></script>
+
+<script type="text/javascript" src="/System/Library/WidgetResources/AppleClasses/AppleAnimator.js"></script>
+
+<script type="text/javascript" src="/System/Library/WidgetResources/AppleClasses/AppleButton.js"></script>
+
+<script type="text/javascript" src="Metronomic.js"></script>
+
+</head> 
+  
+<body onload="setup()" onkeydown="checkKey(event)"> 
+  <!-- Your widget’s front side here -->
+  <div id="front">
+    <div id="infoButton"></div>
+    <canvas id="canvas" width="200" height="200"></canvas>
+    <div id="count"><p id="count_text">1</p></div>
+    <form name="metronomeForm">
+      <span id="bpc_select_textbox"></span>
+      <img id="bpc_select_bg" alt="select_bg" src="Select.png" />
+      <select id="bpc_select" name="bpc_select" size="1" onchange="refreshBPC()">
+        <script type="text/javascript">
+          writeBPCArray();
+        </script>
+      </select>
+      <span id="bpc_label">BPM</span>
+      
+      <span id="bpm_select_textbox"></span>
+      <img id="bpm_select_bg" alt="select_bg" src="Select.png" />
+      <select id="bpm_select" name="bpm_select" size="1" onchange="refreshBPM()">
+        <script type="text/javascript">
+          generateBPMArray();
+          writeBPMArray();
+        </script>
+      </select>
+      <span id="bpm_label">Tempo</span>
+      
+      <input type="button" id="trigger_btn" value="Start" name="trigger_btn" onclick="buttonTrigger()" />
+    </form>
+  </div>
+  
+  <!-- Your widget’s back side here --> 
+  <div id="back">
+    <span id="vis_label">Visualization</span>
+    <span id="vis_select_textbox"></span>
+    <img id="vis_select_bg" alt="select_bg" src="VisualizationSelect.png" />
+    <form name="preferenceForm">
+      <select id="vis_select" name="vis_select" size="1" onchange="refreshVis()">
+      <script type="text/javascript">
+        writeVisualizationArray();
+      </script>
+      </select>
+    </form>
+    
+    <div id="doneButton"></div>
+  </div> 
+</body> 
+</html> 

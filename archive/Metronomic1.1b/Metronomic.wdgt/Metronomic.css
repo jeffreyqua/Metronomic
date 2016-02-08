@@ -1,0 +1,237 @@
+body { 
+  margin: 0;
+}
+form {
+  position: absolute;
+}
+
+.sound {
+  height: 0;
+  visibility: none;
+}
+
+#front {
+  height: 200px;
+  width: 200px;
+  background: url(Default.png) no-repeat;
+  background-size: 200px 200px;
+  display: block;
+  position: relative;
+}
+
+#back {
+  height: 200px;
+  width: 200px;
+  background: url(Back.png) no-repeat;
+  background-size: 200px 200px;
+  display: none;
+  position: relative;
+}
+
+#canvas {
+  z-index: 1;
+}
+
+#infoButton { 
+  position:absolute; 
+  bottom:30px; 
+  right:30px; 
+} 
+  
+#front { 
+  display:block; 
+}  
+
+#back { 
+  display:none;
+}  
+  
+#doneButton { 
+  position:absolute; 
+  bottom:20px; 
+  right:20px;
+} 
+
+#trigger_btn {
+  width: 60px;
+  position: absolute;
+  bottom: 15px;
+  left: 70px;
+
+  color: black;
+}
+
+#startButton {
+  position:absolute; 
+  bottom:15px; 
+  left:70px;
+}
+
+#bpc_select {
+  position: absolute;
+  bottom: 56px;
+  left: 55px;
+  
+  opacity: 0.0;
+  z-index: 3;
+}
+
+#bpc_select_textbox {
+  position: absolute;
+  bottom: 60px;
+  left: 65px;
+  
+  text-align: center;
+  color: #343434;
+  text-shadow: 1px 1px 0 white;
+  font: 12px "Helvetica";
+  font-weight: bold;
+  
+  z-index: 2;
+}
+
+#bpc_select_bg {
+  position: absolute;
+  bottom: 58px;
+  left: 53px;
+  width: 55px;
+  height: 20px;
+  
+  z-index: 1;
+}
+
+#bpc_label {
+  position: absolute;
+  bottom: 59px;
+  left: 115px;
+  
+  color: #343434;
+  text-shadow: 1px 1px 0 white;
+  font: 12px "Helvetica";
+  font-weight: bold;
+}
+
+#bpm_select {
+  position: absolute;
+  bottom: 46px;
+  left: 55px;
+  
+  opacity: 0.0;
+  z-index: 3;
+}
+
+#bpm_select_textbox {
+  position: absolute;
+  bottom: 50px;
+  left: 65px;
+  
+  text-align: center;
+  color: #343434;
+  text-shadow: 1px 1px 0 white;
+  font: 12px "Helvetica";
+  font-weight: bold;
+  
+  z-index: 2;
+}
+
+#bpm_select_bg {
+  position: absolute;
+  bottom: 48px;
+  left: 53px;
+  width: 55px;
+  height: 20px;
+  
+  z-index: 1;
+}
+
+#bpm_label {
+  position: absolute;
+  bottom: 49px;
+  left: 115px;
+  
+  color: #343434;
+  text-shadow: 1px 1px 0 white;
+  font: 12px "Helvetica";
+  font-weight: bold;
+}
+
+
+#widgetName {
+  position: absolute; 
+  top: 6px; 
+  left: 42px; 
+  color: #363; 
+  
+  font: 14px "Century Gothic";
+  font-weight: bold; 
+  text-shadow: #aaa 1px 1px 1px;
+  z-index: 2;
+}
+
+#widgetVersion {
+  color: #444;
+}
+
+#divider {
+  width: 70%;
+  position: absolute; 
+  top: 17px; 
+  left: 28px;
+  color: blue;
+}
+
+#vis_select {
+  position: absolute;
+  top: 35px;
+  left: 105px;
+  
+  opacity: 0.0;
+  z-index: 3;
+}
+
+#vis_select_textbox {
+  position: absolute;
+  top: 40px;
+  left: 113px;
+  
+  text-align: center;
+  color: #343434;
+  text-shadow: 1px 1px 0 white;
+  font: 11px "Helvetica";
+  font-weight: bold;
+  
+  z-index: 2;
+}
+
+#vis_select_bg {
+  position: absolute;
+  top: 37px;
+  left: 103px;
+  width: 70px;
+  height: 20px;
+  
+  z-index: 1;
+}
+
+#vis_label {
+  position: absolute;
+  top: 40px;
+  left: 27px;
+  
+  color: #343434;
+  font: 12px "Helvetica";
+  text-shadow: 1px 1px 0 white;
+  font-weight: bold;
+}
+
+#count {
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  
+  text-align: center;
+  color: #06C;
+  font: 40px "Helvetica, sans-serif";
+  font-weight: bold;
+  width: 200px;
+}
