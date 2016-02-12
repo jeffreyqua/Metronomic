@@ -1,0 +1,79 @@
+﻿<html> 
+<head>
+<!--
+	// Metronomic v1.0 - 15 Jan 2012
+	// Programmed by: Jeffrey Qua <jeffrey.qua@gmail.com>
+	// Nov 25 2006 - v0.1
+	// Nov 27 2006 - v0.2
+	// Dec 08 2006 - v0.3
+	// Feb 18 2007 - v0.32
+	// Apr 25 2008 - v0.4 fixed timing issues
+	// Apr 30 2008 - v0.41 re-implemented analog visualization
+	// Jul 06 2008 - v0.42 analog visualization glitch fix
+	// 15 Jan 2012 - v1.0 fixed canvas issue, ui changes, removed update/version check
+-->
+<style type="text/css"> 
+	@import "Metronomic.css";
+</style>
+
+<script type='text/javascript' src='/System/Library/WidgetResources/AppleClasses/AppleInfoButton.js' charset='utf-8' />
+<script type='text/javascript' src='/System/Library/WidgetResources/AppleClasses/AppleAnimator.js' charset='utf-8' />
+<script type='text/javascript' src='/System/Library/WidgetResources/AppleClasses/AppleButton.js' charset='utf-8' />
+
+<script type="text/javascript" language="JavaScript" src="Metronomic.js">
+</script>
+
+</head> 
+  
+<body onload="setup()" onkeydown="checkKey(event)"> 
+	<div id="front">
+	<div id="infoButton"></div>
+		<embed src="tick.mp3" class="sound" autostart="false" hidden="true" name="tickSound" enablejavascript="true"> 
+		<embed src="tick2.mp3" class="sound" autostart="false" hidden="true" name="tick2Sound" enablejavascript="true"> 
+   	<!-- Your widget’s front side here -->
+		<canvas id="canvas" width="200" height="200"></canvas>
+		<div id="count"><p id="count_text">1</p></div>
+		<form name="metronomeForm">
+			<span id="bpc_select_textbox"></span>
+			<img id="bpc_select_bg" alt="select_bg" src="Select.png" />
+			<select id="bpc_select" name="bpc_select" size="1" onchange="refreshBPC()">
+				<script type="text/javascript">
+					writeBPCArray();
+				</script>
+			</select>
+			<span id="bpc_label">BPM</span>
+			
+			<span id="bpm_select_textbox"></span>
+			<img id="bpm_select_bg" alt="select_bg" src="Select.png" />
+			<select id="bpm_select" name="bpm_select" size="1" onchange="refreshBPM()">
+				<script type="text/javascript">
+					generateBPMArray();
+					writeBPMArray();
+				</script>
+			</select>
+			<!--
+			<div id="startButton"></div>
+			-->
+			<input type="button" id="trigger_btn" value="Start" name="trigger_btn" onclick="buttonTrigger()" />
+		</form>
+		<span id="bpm_label">Tempo</span>
+	</div>
+  
+	<div id="back">
+		<!-- Your widget’s back side here --> 
+		
+		<span id="vis_label">Visualization</span>
+		<span id="vis_select_textbox"></span>
+		<img id="vis_select_bg" alt="select_bg" src="VisualizationSelect.png" />
+		<form name="preferenceForm">
+			<select id="vis_select" name="vis_select" size="1" onchange="refreshVis()">
+			<script type="text/javascript">
+				writeVisualizationArray();
+			</script>
+			</select>
+		</form>
+		
+		<div id="doneButton"></div>
+	</div> 
+</body> 
+</html> 

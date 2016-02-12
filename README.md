@@ -32,6 +32,9 @@ v1.0 - 15 Jan 2012
 
 v1.0b - 15 Jan 2012
 
+v1.0c - 09 Feb 2016
+- Downbeat on beat 12 when at 12BPM - Flamenco request (OSX10.4)
+
 v1.1 - 06 Feb 2016
 - Fix for Yosemite
 - code cleanup
